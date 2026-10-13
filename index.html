@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Plata - Financial Bank</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-university"></i>
+                <span>Mi Plata</span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#" onclick="mostrarSeccion('inicio')">Inicio</a></li>
+                <li id="navLogin"><a href="#" onclick="mostrarSeccion('login')">Iniciar Sesión</a></li>
+                <li id="navRegistro"><a href="#" onclick="mostrarSeccion('registro')">Registrarse</a></li>
+                <li id="navPanel" style="display:none;"><a href="#" onclick="mostrarSeccion('panel')">Panel</a></li>
+                <li id="navAdmin" style="display:none;"><a href="#" onclick="mostrarSeccion('admin')">Admin Usuarios</a></li>
+                <li id="navLogout" style="display:none;"><a href="#" onclick="cerrarSesion()">Cerrar Sesión</a></li>
+            </ul>
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- SECCIÓN INICIO (LANDING) -->
+    <section id="inicio" class="seccion activa">
+        <div class="hero">
+            <div class="hero-content">
+                <h1>Bienvenido a <span class="highlight">Mi Plata</span></h1>
+                <p class="hero-subtitle">Tu banco digital de confianza. Ahorra, transfiere y controla tu dinero de forma segura y sencilla.</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" onclick="mostrarSeccion('registro')">Crear Cuenta</button>
+                    <button class="btn btn-secondary" onclick="mostrarSeccion('login')">Iniciar Sesión</button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="card-visual">
+                    <i class="fas fa-credit-card"></i>
+                    <span>MI PLATA</span>
+                    <small>FINANCIAL BANK</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="features">
+            <h2>Nuestros Productos</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-piggy-bank"></i>
+                    <h3>Cuenta de Ahorros</h3>
+                    <p>Guarda tu dinero de forma segura y genera rendimientos del 1.5% mensual al retirar.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-wallet"></i>
+                    <h3>Cuenta Corriente</h3>
+                    <p>Gestiona tu día a día con sobregiro hasta del 20% sobre tu saldo.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-credit-card"></i>
+                    <h3>Tarjeta de Crédito</h3>
+                    <p>Compra a cuotas con tasas preferenciales según el plazo que elijas.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="about">
+            <h2>Sobre Mi Plata</h2>
+            <p>Somos una entidad financiera digital comprometida con la educación financiera y el acceso a productos bancarios modernos. Desarrollado como proyecto académico de CESDE - Desarrollo de Software.</p>
+        </div>
+    </section>
+
+    <!-- SECCIÓN REGISTRO -->
+    <section id="registro" class="seccion">
+        <div class="form-container">
+            <h2><i class="fas fa-user-plus"></i> Registro de Nuevo Cliente</h2>
+            <form id="formRegistro" onsubmit="registrarCliente(event)">
+                <div class="form-group">
+                    <label>Número de Identificación</label>
+                    <input type="text" id="regId" required placeholder="Cédula o pasaporte">
+                </div>
+                <div class="form-group">
+                    <label>Nombre Completo</label>
+                    <input type="text" id="regNombre" required placeholder="Tu nombre completo">
+                </div>
+                <div class="form-group">
+                    <label>Número de Celular</label>
+                    <input type="tel" id="regCelular" required placeholder="3001234567">
+                </div>
+                <div class="form-group">
+                    <label>Nombre de Usuario</label>
+                    <input type="text" id="regUsuario" required placeholder="usuario único">
+                </div>
+                <div class="form-group">
+                    <label>Contraseña</label>
+                    <input type="password" id="regPassword" required minlength="4" placeholder="Mínimo 4 caracteres">
+                </div>
+                <div class="form-group">
+                    <label>Confirmar Contraseña</label>
+                    <input type="password" id="regPasswordConfirm" required placeholder="Repite la contraseña">
+                </div>
+                <div class="form-group">
+                    <label>Tipo de Producto Inicial</label>
+                    <select id="regTipoCuenta" required>
+                        <option value="ahorros">Cuenta de Ahorros</option>
+                        <option value="corriente">Cuenta Corriente</option>
+                        <option value="credito">Tarjeta de Crédito</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Registrarse</button>
+            </form>
+            <p class="form-footer">¿Ya tienes cuenta? <a href="#" onclick="mostrarSeccion('login')">Inicia sesión aquí</a></p>
+        </div>
+    </section>
+
+    <!-- SECCIÓN LOGIN -->
+    <section id="login" class="seccion">
+        <div class="form-container">
+            <h2><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</h2>
+            <form id="formLogin" onsubmit="iniciarSesion(event)">
+                <div class="form-group">
+                    <label>Usuario</label>
+                    <input type="text" id="loginUsuario" required placeholder="Tu nombre de usuario">
+                </div>
+                <div class="form-group">
+                    <label>Contraseña</label>
+                    <input type="password" id="loginPassword" required placeholder="Tu contraseña">
+                </div>
+                <div id="intentosInfo" class="alert alert-warning" style="display:none;">
+                    Intentos fallidos: <span id="contadorIntentos">0</span> / 3
+                </div>
+                <div id="bloqueadoMsg" class="alert alert-danger" style="display:none;">
+                    Cuenta bloqueada por múltiples intentos fallidos. Contacta al administrador.
+                </div>
+                <button type="submit" class="btn btn-primary btn-block" id="btnLogin">Ingresar</button>
+            </form>
+            <p class="form-footer">¿No tienes cuenta? <a href="#" onclick="mostrarSeccion('registro')">Regístrate aquí</a></p>
+        </div>
+    </section>
+
+    <!-- PANEL DE TRANSACCIONES -->
+    <section id="panel" class="seccion">
+        <div class="panel-header">
+            <h2>Panel de Transacciones</h2>
+            <p>Bienvenido, <strong id="nombreUsuario"></strong></p>
+        </div>
+
+        <div class="productos-selector">
+            <label>Selecciona tu producto:</label>
+            <select id="selectProducto" onchange="cambiarProducto()"></select>
+            <button class="btn btn-secondary btn-sm" id="btnAbrirProducto" onclick="mostrarModal('abrirProducto')" style="margin-left: 0.5rem;">
+                <i class="fas fa-plus"></i> Abrir nuevo producto
+            </button>
+        </div>
+
+        <div class="saldo-card">
+            <h3>Saldo Disponible</h3>
+            <p class="saldo-valor" id="saldoActual">$0</p>
+            <p class="tipo-cuenta" id="tipoCuentaActual"></p>
+        </div>
+
+        <div class="acciones-grid">
+            <button class="accion-btn" onclick="mostrarModal('consignar')">
+                <i class="fas fa-plus-circle"></i>
+                <span>Consignar</span>
+            </button>
+            <button class="accion-btn" onclick="mostrarModal('retirar')">
+                <i class="fas fa-minus-circle"></i>
+                <span>Retirar</span>
+            </button>
+            <button class="accion-btn" onclick="consultarSaldo()">
+                <i class="fas fa-search-dollar"></i>
+                <span>Consultar Saldo</span>
+            </button>
+            <button class="accion-btn" onclick="mostrarMovimientos()">
+                <i class="fas fa-history"></i>
+                <span>Movimientos</span>
+            </button>
+            <button class="accion-btn" onclick="mostrarModal('transferir')">
+                <i class="fas fa-exchange-alt"></i>
+                <span>Transferir</span>
+            </button>
+            <button class="accion-btn" onclick="mostrarModal('perfil')">
+                <i class="fas fa-user-cog"></i>
+                <span>Perfil</span>
+            </button>
+            <button class="accion-btn" onclick="mostrarModal('compraCredito')" id="btnCompraCredito" style="display:none;">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Compra a Cuotas</span>
+            </button>
+        </div>
+
+        <div id="resultadoOperacion" class="resultado"></div>
+    </section>
+
+    <!-- ADMIN USUARIOS (CRUD) -->
+    <section id="admin" class="seccion">
+        <div class="panel-header">
+            <h2>Administración de Usuarios</h2>
+            <button class="btn btn-primary" onclick="mostrarModal('nuevoUsuario')">+ Nuevo Usuario</button>
+        </div>
+        <div class="table-container">
+            <table id="tablaUsuarios">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Usuario</th>
+                        <th>Celular</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tbodyUsuarios"></tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- MODALES -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="cerrarModal()">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Mi Plata Financial Bank</h4>
+                <p>Proyecto académico - CESDE</p>
+                <p>Desarrollo de Software - 2do Semestre</p>
+            </div>
+            <div class="footer-section">
+                <h4>Contacto</h4>
+                <p><i class="fas fa-envelope"></i> contacto@miplata.com</p>
+                <p><i class="fas fa-phone"></i> +57 300 123 4567</p>
+            </div>
+            <div class="footer-section">
+                <h4>Síguenos</h4>
+                <div class="social">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Mi Plata - Proyecto de Aula CESDE. Docente: Jorge Albeiro Muriel Vélez</p>
+        </div>
+    </footer>
+
+    <script src="js/clases.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
